@@ -11,6 +11,6 @@ resource "aws_security_group" "internal" {
   }
 
   tags {
-    Name = "allow_all"
+    Name = "internal"
   }
 }

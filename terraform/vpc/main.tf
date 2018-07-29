@@ -38,7 +38,16 @@ resource "aws_internet_gateway" "gw" {
     Name = "VPC IGW"
   }
 }
+resource "aws_eip" "nat_eip" {
+  vpc      = true
+  depends_on = ["aws_internet_gateway.gw"]
+}
 
+resource "aws_nat_gateway" "nat" {
+    allocation_id = "${aws_eip.nat_eip.id}"
+    subnet_id = "${aws_subnet.public-subnet.id}"
+    depends_on = ["aws_internet_gateway.gw"]
+}
 # Define the route table
 resource "aws_route_table" "web-public-rt" {
   vpc_id = "${aws_vpc.default.id}"
@@ -52,9 +61,26 @@ resource "aws_route_table" "web-public-rt" {
     Name = "Public Subnet RT"
   }
 }
+resource "aws_route_table" "private_route_table" {
+    vpc_id = "${aws_vpc.default.id}"
 
+    tags {
+        Name = "Private route table"
+    }
+}
+
+resource "aws_route" "private_route" {
+	route_table_id  = "${aws_route_table.private_route_table.id}"
+	destination_cidr_block = "0.0.0.0/0"
+	nat_gateway_id = "${aws_nat_gateway.nat.id}"
+}
 # Assign the route table to the public Subnet
 resource "aws_route_table_association" "web-public-rt" {
   subnet_id = "${aws_subnet.public-subnet.id}"
   route_table_id = "${aws_route_table.web-public-rt.id}"
 }
+resource "aws_route_table_association" "private-route" {
+    subnet_id = "${aws_subnet.private-subnet.id}"
+    route_table_id = "${aws_route_table.private_route_table.id}"
+}
+

@@ -11,6 +11,6 @@ resource "aws_security_group" "external" {
   }
 
   tags {
-    Name = "allow_all"
+    Name = "external"
   }
 }
