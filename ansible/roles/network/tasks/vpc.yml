@@ -1,0 +1,21 @@
+---
+- name: Create/Destroy Network - VPC
+  terraform:
+    project_path: "../terraform/vpc/" 
+    force_init: yes
+    variables:
+      environment_name: "{{ environment_name }}"
+      vpc_name: "{{ vpc_name }}"
+      vpc_cidr: "{{ vpc_cidr }}"
+      private_subnet_cidr: "{{ private_subnet_cidr }}"
+      public_subnet_cidr: "{{ public_subnet_cidr }}"
+      region: "{{ region }}"
+    state: "{{ state }}"
+  register: vpc_tf
+  ignore_errors: yes
+  environment:
+    TF_WORKSPACE: "{{ environment_name }}"
+
+- debug: var=vpc_tf.outputs.vpc_id.value
+- debug: var=vpc_tf.outputs.public_subnet_id.value
+- debug: var=vpc_tf.outputs.private_subnet_id.value

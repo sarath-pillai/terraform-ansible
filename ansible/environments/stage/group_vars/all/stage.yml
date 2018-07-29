@@ -1,0 +1,8 @@
+---
+vpc_name: terraform_test
+vpc_cidr: 10.15.0.0/16
+private_subnet_cidr: 10.15.1.0/24
+public_subnet_cidr: 10.15.2.0/24
+enable_nat: true
+availability_zones: ["us-east-1a", "us-east-1b", "us-east-1c"]
+region: us-east-1

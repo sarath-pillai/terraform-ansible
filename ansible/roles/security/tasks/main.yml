@@ -1,0 +1,19 @@
+---
+- name: Create/Destroy Security Group
+  terraform:
+    project_path: "../terraform/security/"
+    force_init: yes
+    variables:
+      environment_name: "{{ environment_name }}"
+      vpc_id: "{{ vpc_tf.outputs.vpc_id.value }}"
+      internal_cidr: "{{ vpc_cidr }}"
+      external_cidr: "{{ external_cidr }}"
+      region: "{{ region }}"
+    state: "{{ state }}"
+  register: sg_tf
+  ignore_errors: yes
+  environment:
+    TF_WORKSPACE: "{{ environment_name }}"
+
+- debug: var=sg_tf.outputs.internal_sg_id.value
+- debug: var=sg_tf.outputs.external_sg_id.value
