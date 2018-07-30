@@ -6,7 +6,7 @@
         outputs:
            vpc_id:
                value: ""
-           private_subnet_id:
+           private_subnet1_id:
                value: ""
     sg_tf:
         outputs:
