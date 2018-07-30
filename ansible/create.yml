@@ -16,6 +16,36 @@
     teardown: false
     region: us-east-1
     external_cidr: 0.0.0.0/0
+    ecs_cluster: test-nginx
+    ecs_key_pair_name: terraform-test
+    instance_name: test-nginx-ecs
+    ecs_launch_configuration: test-nginx-launch
+    ami_id: ami-fbc1c684 
+    instance_type: t2.micro
+    service_name: test-nginx
+    taskdef_family: test-nginx
+    root_volume_size: 30
+    max_instance_size: 1
+    min_instance_size: 1
+    desired_capacity: 1
+    container_memory: 400
+    container_cpu: 400
+    target_group_name: test-nginx
+    ecs_instance_role_name: test-nginx
+    target_group_protocol: HTTP
+    response_match: 200
+    unhealthy_threshold: 2
+    target_group_port: 80
+    service_role_name: test-nginx
+    healthcheck_timeout: 20
+    autoscaling_group_name: test-nginx
+    ecs_instance_profile_name: test-nginx
+    healthcheck_interval: 30 
+    healthcheck_protocol: HTTP
+    http_path: /
+    container_name: test-nginx
+    lb_listener_port: 80 
+    container_port: 80
   roles:
     - network
     - security

@@ -1,4 +1,4 @@
-module "ui" {
+module "ecs" {
   source = "../../modules/ecs/"
 
   ecs_cluster               = "${var.ecs_cluster}"
@@ -9,6 +9,7 @@ module "ui" {
   region                    = "${var.region}"
   vpc_id                    = "${var.vpc_id}"
   instance_name             = "${var.instance_name}"
+  lb_arn                    = "${var.lb_arn}"
   instance_subnet1          = "${var.instance_subnet1}"
   instance_subnet2          = "${var.instance_subnet2}"
   ecs_launch_configuration  = "${var.ecs_launch_configuration}"

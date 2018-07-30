@@ -12,6 +12,8 @@
                value: ""
            public_subnet1_id:
                value: ""
+           private_subnet2_id:
+               value: ""
     sg_tf:
         outputs:
           internal_sg_id:

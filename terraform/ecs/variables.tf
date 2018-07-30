@@ -15,6 +15,9 @@ variable "region" {
 variable "target_group_port" {
   description = "Target Group Port"
 }
+variable "lb_arn" {
+  description = "Load Balancer ARN"
+}
 variable "target_group_protocol" {
   description = "Target Group Protocol"
 }
