@@ -7,7 +7,7 @@
       environment_name: "{{ environment_name }}"
       key_name: "{{ key_name }}"
       security_group: "{{ sg_tf.outputs.internal_sg_id.value }}"
-      subnetid: "{{ vpc_tf.outputs.private_subnet_id.value }}" 
+      subnetid: "{{ vpc_tf.outputs.private_subnet1_id.value }}" 
       public_ip: "{{ public_ip }}"
       region: "{{ region }}"
     state: "{{ state }}"
