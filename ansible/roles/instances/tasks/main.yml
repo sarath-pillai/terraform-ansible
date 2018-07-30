@@ -1,0 +1,20 @@
+---
+- name: Create/Destroy Required Instances
+  terraform:
+    project_path: "../terraform/instances/"
+    force_init: yes
+    variables:
+      environment_name: "{{ environment_name }}"
+      key_name: "{{ key_name }}"
+      security_group: "{{ sg_tf.outputs.internal_sg_id.value }}"
+      subnetid: "{{ vpc_tf.outputs.private_subnet_id.value }}" 
+      public_ip: "{{ public_ip }}"
+      region: "{{ region }}"
+    state: "{{ state }}"
+  register: instances_tf
+  ignore_errors: yes
+  environment:
+    TF_WORKSPACE: "{{ environment_name }}"
+
+- debug: var=instances_tf.outputs.mongo_instance_id.value
+- debug: var=instances_tf.outputs.private_ip.value

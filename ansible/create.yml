@@ -8,9 +8,12 @@
     state: present
     public_subnet_cidr: 10.15.2.0/24
     environment_name: stage
+    key_name: terraform-test
+    public_ip: false
     teardown: false
     region: us-east-1
     external_cidr: 0.0.0.0/0
   roles:
     - network
     - security
+    - instances

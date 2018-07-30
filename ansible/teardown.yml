@@ -5,6 +5,12 @@
     vpc_tf:
         outputs:
            vpc_id:
+               value: ""
+           private_subnet_id:
+               value: ""
+    sg_tf:
+        outputs:
+          internal_sg_id:
                value: "" 
     vpc_name: stage
     vpc_cidr: 10.15.0.0/16
@@ -15,7 +21,10 @@
     environment_name: stage
     enable_nat: true
     region: us-east-1
+    public_ip: false
+    key_name: terraform-test 
     external_cidr: 0.0.0.0/0
   roles:
+    - instances
     - security
     - network
