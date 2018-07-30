@@ -1,0 +1,20 @@
+---
+- name: Create/Destroy LB
+  terraform:
+    project_path: "../terraform/lb/"
+    force_init: yes
+    variables:
+      environment_name: "{{ environment_name }}"
+      alb_name: "{{ alb_name }}"
+      lb_pub_sub1: "{{ vpc_tf.outputs.public_subnet1_id.value }}"
+      lb_sg_id: "{{ sg_tf.outputs.external_sg_id.value }}"
+      lb_pub_sub2: "{{ vpc_tf.outputs.public_subnet2_id.value }}"
+      region: "{{ region }}"
+    state: "{{ state }}"
+  register: lb_tf
+  ignore_errors: yes
+  environment:
+    TF_WORKSPACE: "{{ environment_name }}"
+
+- debug: var=lb_tf.outputs.alb_front_dns.value
+- debug: var=lb_tf.outputs.alb_front_arn.value

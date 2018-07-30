@@ -3,6 +3,7 @@
   vars:
     type: stage
     vpc_name: stage
+    alb_name: front-end-nginx
     vpc_cidr: 10.15.0.0/16
     private_subnet_cidr1: 10.15.1.0/24
     private_subnet_cidr2: 10.15.2.0/24
@@ -19,3 +20,4 @@
     - network
     - security
     - instances
+    - lb
